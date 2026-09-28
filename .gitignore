@@ -1,0 +1,64 @@
+/target
+
+# ==========================================
+# Rust / Cargo
+# ==========================================
+
+# Cargo build artifacts
+/target/
+
+# Rust backup files
+*.rs.bk
+
+# Cargo.lock
+# Uncomment if this is a library and you don't want to commit it.
+# For applications/binaries, Cargo.lock should generally be committed.
+# Cargo.lock
+
+
+# ==========================================
+# Environment & Secrets
+# ==========================================
+
+.env
+.env.*
+!.env.example
+
+
+# ==========================================
+# IDE / Editor
+# ==========================================
+
+# Visual Studio Code
+.vscode/
+
+# IntelliJ / RustRover
+.idea/
+
+# Vim
+*.swp
+*.swo
+
+# Emacs
+*~
+
+
+# ==========================================
+# Operating System
+# ==========================================
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+
+# ==========================================
+# Logs & Temporary Files
+# ==========================================
+
+*.log
+*.tmp
+*.temp
