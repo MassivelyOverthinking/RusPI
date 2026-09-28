@@ -2,17 +2,18 @@
 // IMPORTS
 //===========================================================================================================================
 
-mod onnx;
-mod routes;
-mod controllers;
-mod models;
+use axum::{Router, routing::{post}};
+use crate::controllers::prediction::predict;
 
 //===========================================================================================================================
-// MAIN
+// ONNX INFERENCE
 //===========================================================================================================================
 
-fn main() {
-    let text = String::new();
-
-    println!("{}", text.len());
+pub fn inference_routes() -> Router {
+    Router::new().route("/predict", post(predict))
 }
+
+
+
+
+
