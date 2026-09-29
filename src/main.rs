@@ -4,7 +4,6 @@
 
 use std::sync::Arc;
 use axum::Router;
-use ort::ErrorCode::Ok;
 
 use crate::routes::inference::inference_routes;
 use crate::state::AppState;
@@ -17,6 +16,7 @@ mod onnx;
 mod routes;
 mod controllers;
 mod models;
+mod responses;
 mod cache;
 mod state;
 mod error;

@@ -2,7 +2,7 @@
 // IMPORTS
 //===========================================================================================================================
 
-use std::collections::HashMap;
+use std::{collections::HashMap, sync::RwLock};
 use ort::session::{Session, builder::GraphOptimizationLevel};
 
 //===========================================================================================================================
@@ -10,8 +10,8 @@ use ort::session::{Session, builder::GraphOptimizationLevel};
 //===========================================================================================================================
 
 pub struct AppState {
-    pub session: ort::session::Session,
-    pub cache: std::collections::HashMap<String, String>,
+    pub session: RwLock<ort::session::Session>,
+    pub cache: RwLock<std::collections::HashMap<String, String>>,
 }
 
 impl AppState {
@@ -24,8 +24,8 @@ impl AppState {
         let cache = HashMap::new();
 
         Ok(Self {
-            session,
-            cache,
+            session: RwLock::new(session),
+            cache: RwLock::new(cache),
         })
     }
 }
