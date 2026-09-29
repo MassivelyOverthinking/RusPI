@@ -2,14 +2,16 @@
 // IMPORTS
 //===========================================================================================================================
 
+use std::sync::Arc;
+
 use axum::{Router, routing::{post}};
-use crate::controllers::prediction::predict;
+use crate::{controllers::prediction::predict, state::AppState};
 
 //===========================================================================================================================
 // ONNX INFERENCE
 //===========================================================================================================================
 
-pub fn inference_routes() -> Router {
+pub fn inference_routes() -> Router<Arc<AppState>> {
     Router::new().route("/predict", post(predict))
 }
 

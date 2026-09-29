@@ -4,6 +4,7 @@
 
 use std::sync::Arc;
 use axum::extract::State;
+use ort::value::Tensor;
 
 use crate::state::AppState;
 
@@ -11,6 +12,7 @@ use crate::state::AppState;
 // ONNX PREDICTION
 //===========================================================================================================================
 
-pub async fn predict(State(state): State<Arc<AppState>>) {
-    println!("Prediction");
+pub async fn predict(State(state): State<Arc<AppState>>) -> ort::Result<Vec<f32>> {
+    
+
 }
