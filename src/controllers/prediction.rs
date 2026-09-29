@@ -18,7 +18,29 @@ pub async fn predict(
     State(state): State<Arc<AppState>>,
     Json(request): Json<PredictRequest>
 ) -> Result<Json<PredictResponse>, StatusCode> {
-    let input_array = Array1::from(request.input);
+
+    //===========================================================================================================================
+    // CACHE LOOKUP
+    //===========================================================================================================================
+
+    {
+        let cache = state
+            .cache
+            .read()
+            .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+
+        if let Some(output) = cache.get(&request.input) {
+            return Ok(Json(PredictResponse {
+                output: output.clone(),
+            }));
+        }
+    }
+
+    //===========================================================================================================================
+    // CREATE ONNX INPUT
+    //===========================================================================================================================
+
+    let input_array = Array1::from(request.input.clone());
 
     let input = Tensor::from_array(input_array)
         .map_err(|_| StatusCode::BAD_REQUEST)?;
@@ -40,7 +62,26 @@ pub async fn predict(
         .try_extract_tensor::<f32>()
         .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
+    let final_output = output_data.to_vec();
+
+    //===========================================================================================================================
+    // ONNX INFERENCE SESSION
+    //===========================================================================================================================
+
+    {
+        let mut cache = state
+            .cache
+            .write()
+            .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+
+        cache.add(&request.input, final_output.clone());
+    }
+
+    //===========================================================================================================================
+    // RESPONSE
+    //===========================================================================================================================
+
     Ok(Json(PredictResponse {
-        output: output_data.to_vec(),
+        output: final_output,
     }))
 }

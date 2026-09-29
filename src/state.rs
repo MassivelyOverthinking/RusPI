@@ -3,7 +3,9 @@
 //===========================================================================================================================
 
 use std::{collections::HashMap, sync::RwLock};
-use ort::session::{Session, builder::GraphOptimizationLevel};
+use ort::{ErrorCode::Ok, session::{Session, builder::GraphOptimizationLevel}};
+
+use crate::cache::cache::SimpleCache;
 
 //===========================================================================================================================
 // APP STATE
@@ -11,7 +13,7 @@ use ort::session::{Session, builder::GraphOptimizationLevel};
 
 pub struct AppState {
     pub session: RwLock<ort::session::Session>,
-    pub cache: RwLock<std::collections::HashMap<String, String>>,
+    pub cache: RwLock<SimpleCache>,
 }
 
 impl AppState {
@@ -21,7 +23,7 @@ impl AppState {
             .with_intra_threads(4)?
             .commit_from_file("")?;
 
-        let cache = HashMap::new();
+        let cache = SimpleCache::new();
 
         Ok(Self {
             session: RwLock::new(session),
