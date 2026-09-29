@@ -2,8 +2,8 @@
 // IMPORTS
 //===========================================================================================================================
 
-use std::{collections::HashMap, sync::RwLock};
-use ort::{ErrorCode::Ok, session::{Session, builder::GraphOptimizationLevel}};
+use std::{sync::RwLock};
+use ort::{session::{Session, builder::GraphOptimizationLevel}};
 
 use crate::cache::cache::SimpleCache;
 
