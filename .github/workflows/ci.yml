@@ -3,11 +3,11 @@ name: Rust ONNX CI/CD
 on:
   push:
     branches:
-      - main
+      - master
 
   pull_request:
     branches:
-      - main
+      - master
 
 env:
   IMAGE_NAME: rust-onnx-api
