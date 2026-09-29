@@ -20,7 +20,7 @@ impl AppState {
     pub fn new() -> Result<Self, ort::error::Error> {
         let model_path = concat!(
             env!("CARGO_MANIFEST_DIR"),
-            "/src/onnx/resnet18-v1-7.onnx"
+            "/onnx/resnet18-v1-7.onnx"
         );
 
         let session = Session::builder()?
