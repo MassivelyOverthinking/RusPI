@@ -14,7 +14,6 @@ use crate::state::AppState;
 
 mod cache;
 mod controllers;
-mod models;
 mod responses;
 mod routes;
 mod state;
