@@ -38,7 +38,9 @@ impl SimpleCache {
             return;
         }
 
-        if self.is_full() && let Some(key) = self.order.pop() {
+        if self.is_full()
+            && let Some(key) = self.order.pop()
+        {
             self.cache.remove(&key);
         }
 
