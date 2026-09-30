@@ -5,7 +5,7 @@
 use ort::session::{Session, builder::GraphOptimizationLevel};
 use std::sync::RwLock;
 
-use crate::cache::cache::SimpleCache;
+use crate::cache::storage::SimpleCache;
 
 //===========================================================================================================================
 // APP STATE

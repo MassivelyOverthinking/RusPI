@@ -29,6 +29,7 @@ impl SimpleCache {
         self.cache.get(&key)
     }
 
+    #[allow(clippy::map_entry)]
     pub fn add(&mut self, input: &[f32], prediction: Vec<f32>) {
         let key = Self::make_key(input);
 
@@ -37,10 +38,8 @@ impl SimpleCache {
             return;
         }
 
-        if self.is_full() {
-            if let Some(key) = self.order.pop() {
-                self.cache.remove(&key);
-            }
+        if self.is_full() && let Some(key) = self.order.pop() {
+            self.cache.remove(&key);
         }
 
         self.cache.insert(key.clone(), prediction);
