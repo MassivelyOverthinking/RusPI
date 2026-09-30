@@ -9,8 +9,8 @@ WORKDIR /app
 # Install native dependencies required to build the application
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        pkg-config \
-        libssl-dev \
+        pkg-config=1.8.1-1 \
+        libssl-dev=3.0.20-1~deb12u2 \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy dependency manifests first
@@ -33,8 +33,8 @@ WORKDIR /app
 # Install only runtime dependencies
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        ca-certificates \
-        libssl3 \
+        ca-certificates=20250419~deb12u1 \
+        libssl3=3.0.22-1~deb12u1 \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the compiled application from the builder stage
