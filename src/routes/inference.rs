@@ -4,8 +4,8 @@
 
 use std::sync::Arc;
 
-use axum::{Router, routing::{post}};
 use crate::{controllers::prediction::predict, state::AppState};
+use axum::{Router, routing::post};
 
 //===========================================================================================================================
 // ONNX INFERENCE
@@ -14,8 +14,3 @@ use crate::{controllers::prediction::predict, state::AppState};
 pub fn inference_routes() -> Router<Arc<AppState>> {
     Router::new().route("/predict", post(predict))
 }
-
-
-
-
-

@@ -2,21 +2,21 @@
 // IMPORTS
 //===========================================================================================================================
 
-use std::sync::Arc;
 use axum::Router;
+use std::sync::Arc;
 
-use crate::routes::{inference::inference_routes, health::health_routes};
+use crate::routes::{health::health_routes, inference::inference_routes};
 use crate::state::AppState;
 
 //===========================================================================================================================
 // MODULES
 //===========================================================================================================================
 
-mod routes;
+mod cache;
 mod controllers;
 mod models;
 mod responses;
-mod cache;
+mod routes;
 mod state;
 
 //===========================================================================================================================

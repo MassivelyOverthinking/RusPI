@@ -1,2 +1,2 @@
-pub mod inference;
 pub mod health;
+pub mod inference;

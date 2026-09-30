@@ -16,10 +16,10 @@ pub struct SimpleCache {
 
 impl SimpleCache {
     pub fn new() -> Self {
-        Self { 
-            capacity: 100, 
-            order: Vec::new(), 
-            cache: HashMap::new(), 
+        Self {
+            capacity: 100,
+            order: Vec::new(),
+            cache: HashMap::new(),
         }
     }
 
@@ -52,9 +52,6 @@ impl SimpleCache {
     }
 
     fn make_key(input: &[f32]) -> Vec<u8> {
-        input
-            .iter()
-            .flat_map(|value| value.to_ne_bytes())
-            .collect()
+        input.iter().flat_map(|value| value.to_ne_bytes()).collect()
     }
 }

@@ -2,13 +2,16 @@
 // IMPORTS
 //===========================================================================================================================
 
+use axum::{
+    extract::{Json, State},
+    http::StatusCode,
+};
+use ndarray::Array1;
+use ort::value::Tensor;
 use std::sync::Arc;
-use axum::{extract::{Json, State}, http::StatusCode};
-use ort::{value::Tensor};
-use ndarray::{Array1};
 
-use crate::state::AppState;
 use crate::responses::response::{PredictRequest, PredictResponse};
+use crate::state::AppState;
 
 //===========================================================================================================================
 // ONNX PREDICTION
@@ -16,9 +19,8 @@ use crate::responses::response::{PredictRequest, PredictResponse};
 
 pub async fn predict(
     State(state): State<Arc<AppState>>,
-    Json(request): Json<PredictRequest>
+    Json(request): Json<PredictRequest>,
 ) -> Result<Json<PredictResponse>, StatusCode> {
-
     //===========================================================================================================================
     // CACHE LOOKUP
     //===========================================================================================================================
@@ -42,8 +44,7 @@ pub async fn predict(
 
     let input_array = Array1::from(request.input.clone());
 
-    let input = Tensor::from_array(input_array)
-        .map_err(|_| StatusCode::BAD_REQUEST)?;
+    let input = Tensor::from_array(input_array).map_err(|_| StatusCode::BAD_REQUEST)?;
 
     let mut inference_session = state
         .session

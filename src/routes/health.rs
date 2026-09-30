@@ -2,7 +2,7 @@
 // IMPORTS
 //===========================================================================================================================
 
-use axum::{Router, routing::{get}};
+use axum::{Router, routing::get};
 use std::sync::Arc;
 
 use crate::state::AppState;
@@ -12,8 +12,7 @@ use crate::state::AppState;
 //===========================================================================================================================
 
 pub fn health_routes() -> Router<Arc<AppState>> {
-    Router::new()
-        .route("/health", get(health))
+    Router::new().route("/health", get(health))
 }
 
 async fn health() -> &'static str {
